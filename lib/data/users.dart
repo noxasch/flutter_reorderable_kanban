@@ -1,4 +1,5 @@
 import 'package:faker/faker.dart';
+import 'package:random_color/random_color.dart';
 import '../models/user.dart';
 
 final imageUrls = [
@@ -13,10 +14,15 @@ final imageUrls = [
   'https://images.unsplash.com/photo-1585129819171-80b02d4c85b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
 ];
 
-List<User> getUsers() => List.generate(
-  imageUrls.length,
-  (index) => User(
-    name: faker.person.name(),
-    imageUrl: imageUrls[index],
-  ),
-);
+List<User> getUsers({bool isDone}) {
+  RandomColor _colorGenerator = RandomColor();
+  return List.generate(
+    4,
+    (index) => User(
+      name: faker.food.dish(),
+      color: _colorGenerator.randomColor(),
+      imageUrl: imageUrls[index],
+      isDone: isDone ?? false
+    ),
+  );
+}
