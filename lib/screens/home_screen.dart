@@ -128,36 +128,41 @@ class __ListColumnState extends State<_ListColumn> {
         ],
         borderRadius: BorderRadius.circular(5.0)
       ),
-      child: ReorderableList(
-        controller: _scrollController,
-        // buildDefaultDragHandles: false,
-        onReorder: (oldIndex, newIndex) {
-          print('old: $oldIndex new: $newIndex');
-          setState(() {
-            if (oldIndex < newIndex) {
-              newIndex -= 1;
-            }
-            final user = widget.users.removeAt(oldIndex);
-            widget.users.insert(newIndex, user);
-          });
-        },
-        itemCount: widget.users.length,
-        itemBuilder: (context, index) {
-          final user = widget.users[index];
-          return _ListItem(
-            key: ValueKey(user),
-            data: user,
-            index: index,
-            child: CustomItem(
+      child: Scrollbar(
+        isAlwaysShown: true,
+        child: ReorderableList(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true, // follow child height ?
+          controller: _scrollController,
+          // buildDefaultDragHandles: false,
+          onReorder: (oldIndex, newIndex) {
+            print('old: $oldIndex new: $newIndex');
+            setState(() {
+              if (oldIndex < newIndex) {
+                newIndex -= 1;
+              }
+              final user = widget.users.removeAt(oldIndex);
+              widget.users.insert(newIndex, user);
+            });
+          },
+          itemCount: widget.users.length,
+          itemBuilder: (context, index) {
+            final user = widget.users[index];
+            return _ListItem(
+              key: ValueKey(user),
+              data: user,
               index: index,
-              user: user
-            ),
-          );
-          // return _ListItem(
-          //   key: ValueKey(user), 
-          //   user: user, 
-          //   index: index,);
-        },
+              child: CustomItem(
+                index: index,
+                user: user
+              ),
+            );
+            // return _ListItem(
+            //   key: ValueKey(user), 
+            //   user: user, 
+            //   index: index,);
+          },
+        ),
       ),
     );
   }
@@ -317,6 +322,7 @@ class _CustomItemState extends State<CustomItem> {
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             // color: widget.user.color, // Colors.white,
+            color: Colors.white,
             // border: Border.all(
             //   color: Colors.grey,
             // ),

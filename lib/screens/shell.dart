@@ -5,16 +5,22 @@ import '../screens/home_screen.dart';
 class Shell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: [
-          Expanded(child: HomeScreen(data: getUsers(), title: 'To Do', columnId: '1',)),
-          const SizedBox(width: 16.0,),
-          Expanded(child: HomeScreen(data: getUsers(),title: 'In Progress', columnId: '2',), ),
-          const SizedBox(width: 16.0,),
-          Expanded(child: HomeScreen(data: getUsers(isDone: true), title: 'Done', columnId: '3',)),
-        ],
+    return Scrollbar(
+      // isAlwaysShown: true,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+         padding: const EdgeInsets.all(16.0),
+         child: Row(
+           children: [
+             HomeScreen(data: getUsers(), title: 'To Do', columnId: '1',),
+             const SizedBox(width: 16.0,),
+             HomeScreen(data: getUsers(),title: 'In Progress', columnId: '2',),
+             const SizedBox(width: 16.0,),
+             HomeScreen(data: getUsers(isDone: true), title: 'Done', columnId: '3',),
+           ],
+         ),
+        ),
       ),
     );
   }

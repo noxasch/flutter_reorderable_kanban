@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       ),
       title: 'Flutter Kanban',
       home: Scaffold(
-        
         appBar: AppBar(
           title: Text('Flutter Kanban'),
         ),
