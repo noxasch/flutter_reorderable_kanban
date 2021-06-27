@@ -130,6 +130,7 @@ class __ListColumnState extends State<_ListColumn> {
       ),
       child: Scrollbar(
         isAlwaysShown: true,
+        controller: _scrollController,
         child: ReorderableList(
           scrollDirection: Axis.vertical,
           shrinkWrap: true, // follow child height ?
